@@ -1,5 +1,6 @@
 import { useState } from "react";
 import sh from "./image/image.png";
+import NavBar from '../components/Nav';
 
 const products = [
   { id: 1, name: 'Dog Food', price: '$100', image: 'https://www.cesar.com/sites/g/files/fnmzdf2476/files/migrate-product-files/images/gone6g2rinqavmwb4jxc.png' },
@@ -65,6 +66,7 @@ const Home = () => {
 
   return (
     <>
+    <NavBar />
       <div className="flex items-center justify-center py-8">
         <img 
           src={sh}
