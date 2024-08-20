@@ -7,7 +7,7 @@ function Account() {
     <NavBar/>
     <div className="container mx-auto p-4 font-montserrat lg:px-12 my-12">
 
-      {/* Welcome message */}
+      {/* Welcome message change as per user*/ }
       <div className="text-right mb-4">
         <span className="text-gray-700">Welcome! </span>
         <span className="text-red-500">Md Rimel</span>
@@ -40,22 +40,22 @@ function Account() {
               <div className="flex flex-col md:flex-row md:space-x-4">
                 <div className="w-full md:w-1/2 mb-4 md:mb-0">
                   <label className="block mb-1">First Name</label>
-                  <input type="text" className="w-full p-2 bg-gray-100 rounded" value="Md" />
+                  <input type="text" className="w-full p-2 bg-gray-100 rounded" />
                 </div>
                 <div className="w-full md:w-1/2">
                   <label className="block mb-1">Last Name</label>
-                  <input type="text" className="w-full p-2 bg-gray-100 rounded" value="Rimel" />
+                  <input type="text" className="w-full p-2 bg-gray-100 rounded"  />
                 </div>
               </div>
 
               <div className="flex flex-col md:flex-row md:space-x-4">
                 <div className="w-full md:w-1/2 mb-4 md:mb-0">
                   <label className="block mb-1">Email</label>
-                  <input type="email" className="w-full p-2 bg-gray-100 rounded" value="rimel1111@gmail.com" />
+                  <input type="email" className="w-full p-2 bg-gray-100 rounded" />
                 </div>
                 <div className="w-full md:w-1/2">
                   <label className="block mb-1">Address</label>
-                  <input type="text" className="w-full p-2 bg-gray-100 rounded" value="Kingston, 5236, United State" />
+                  <input type="text" className="w-full p-2 bg-gray-100 rounded"  />
                 </div>
               </div>
 

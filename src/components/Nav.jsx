@@ -29,8 +29,8 @@ const NavBar = () => {
           {/* Desktop Icons */}
           <div className="hidden lg:flex items-center space-x-6 lg:mr-12 sm:mr-1 font-montserrat">
             <input type="text" placeholder="Search here" className="border rounded px-4 py-2 text-sm border-black bg-slate-100" />
-            <button className="text-xl text-black">&#9825;</button>
-            <button className="text-xl text-black">&#128722;</button>
+            <NavLink to="/wishlist"><button className="text-xl text-black">&#9825;</button></NavLink>
+            <NavLink to="/cart"><button className="text-xl text-black">&#128722;</button></NavLink>
           </div>
         </div>
         {/* Mobile Menu */}
@@ -43,8 +43,8 @@ const NavBar = () => {
           </ul>
           <div className="flex items-center space-x-2 p-4">
             <input type="text" placeholder="Search here" className="border rounded px-4 py-2 text-sm border-black bg-slate-100 w-full" />
-            <button className="text-xl text-black">&#9825;</button>
-            <button className="text-xl text-black">&#128722;</button>
+            <NavLink to="/wishlist"><button className="text-xl text-black">&#9825;</button></NavLink>
+            <NavLink to="/cart"><button className="text-xl text-black">&#128722;</button></NavLink>
           </div>
         </div>
       </nav>

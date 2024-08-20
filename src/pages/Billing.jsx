@@ -1,7 +1,21 @@
-import React from 'react';
+import React , {useContext}from 'react';
 import NavBar from '../components/Nav3';
+import { CartContext } from '../contexts/CartContext';
 
 function BillingPage() {
+  const { cart } = useContext(CartContext);
+
+  if (!cart || cart.length === 0) {
+    return (
+      <>
+        <NavBar />
+        <div className="container mx-auto p-4 lg:px-12 my-12 font-montserrat">
+          <h2 className="text-2xl font-bold text-center my-12">No items to checkout</h2>
+        </div>
+      </>
+    );
+  }
+const subtotal = cart.reduce((acc, item) => acc + (item.discountedPrice || item.price), 0);
   return (
     <>
     <NavBar/>
@@ -45,55 +59,37 @@ function BillingPage() {
           </div>
         </form>
       </div>
-      <div className="w-full md:w-1/3 mt-8 md:mt-0 ">
-        <div className="p-4 rounded border border-black shadow-lg">
-          <h3 className="font-bold mb-4">Order Summary</h3>
-          <div className="flex justify-between mb-2">
-            <div className="flex items-center">
-              <img src="https://m.media-amazon.com/images/I/A1-zhBf7MoL.jpg" alt="LCD Monitor" className="w-12 h-12 object-cover mr-2" />
-              <span>LCD Monitor</span>
+      <div className="w-full md:w-1/3 mt-8 md:mt-0">
+          <div className="p-4 rounded border border-black shadow-lg">
+            <h3 className="font-bold mb-4">Order Summary</h3>
+            {cart.map((item, index) => (
+              <div key={index} className="flex justify-between mb-4">
+                <div className="flex items-center">
+                  <img src={item.image} alt={item.title} className="w-12 h-12 object-cover mr-2" />
+                  <span>{item.title}</span>
+                </div>
+                <span>${item.discountedPrice || item.price}</span>
+              </div>
+            ))}
+            <div className="border-t pt-2">
+              <div className="flex justify-between mb-2">
+                <span>Subtotal:</span>
+                <span>${subtotal}</span>
+              </div>
+              <div className="flex justify-between mb-2">
+                <span>Shipping:</span>
+                <span>Free</span>
+              </div>
+              <div className="flex justify-between font-bold">
+                <span>Total:</span>
+                <span>${subtotal}</span>
+              </div>
             </div>
-            <span>$650</span>
+            {/* Payment Options */}
+            <button className="w-full bg-red-500 text-white py-2 rounded mt-4 hover:bg-red-600">Place Order</button>
           </div>
-          <div className="flex justify-between mb-4">
-            <div className="flex items-center">
-              <img src="https://cdns3.thecosmicbyte.com/wp-content/uploads/white-2.jpg" alt="H1 Gamepad" className="w-12 h-12 object-cover mr-2" />
-              <span>H1 Gamepad</span>
-            </div>
-            <span>$1100</span>
-          </div>
-          <div className="border-t pt-2">
-            <div className="flex justify-between mb-2">
-              <span>Subtotal:</span>
-              <span>$1750</span>
-            </div>
-            <div className="flex justify-between mb-2">
-              <span>Shipping:</span>
-              <span>Free</span>
-            </div>
-            <div className="flex justify-between font-bold">
-              <span>Total:</span>
-              <span>$1750</span>
-            </div>
-          </div>
-          <div className="mt-4">
-            <div className="flex items-center mb-2">
-              <input type="radio" id="bank" name="payment" className="mr-2" />
-              <label htmlFor="bank">Bank</label>
-            </div>
-            <div className="flex items-center">
-              <input type="radio" id="card" name="payment" className="mr-2" />
-              <label htmlFor="card" className="flex items-center">
-                <span className="mr-2">Card</span>
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSOK-ExH64w4vaz6r2HY7kpEc0SEZKmpq7CKg&s" alt="Visa" className="w-8 h-6 mr-1" />
-                <img src="https://www.mastercard.com/content/dam/public/mastercardcom/in/en/logos/mastercard-og-image.png" alt="Mastercard" className="w-8 h-6" />
-              </label>
-            </div>
-          </div>
-          <button className="w-full bg-red-500 text-white py-2 rounded mt-4 hover:bg-red-600">Place Order</button>
         </div>
       </div>
-    </div>
     </>
     
   );
