@@ -27,14 +27,21 @@ const Home = () => {
   const [hoveredIndex, setHoveredIndex] = useState(null);
 
   useEffect(() => {
-    const fetchProducts = async () => {
+  const fetchProducts = async () => {
+    try {
       const querySnapshot = await getDocs(collection(db, "products"));
-      const productsData = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+      const productsData = querySnapshot.docs.map(doc => ({
+        id: doc.id,
+        ...doc.data()
+      }));
       setProducts(productsData);
-    };
+    } catch (error) {
+      console.error("Error fetching products:", error);
+    }
+  };
 
-    fetchProducts();
-  }, []);
+  fetchProducts();
+}, []);
 
   const ProductCard = ({ product, index }) => (
     <div 
@@ -85,10 +92,10 @@ const Home = () => {
         <div className="py-8">
           <h2 className="text-2xl font-bold mb-4 font-montserrat pb-4">Explore Our Products</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {products.map((product, index) => (
-              <ProductCard key={product.id} product={product} index={index} />
-            ))}
-          </div>
+          {products.map((product, index) => (
+            <ProductCard key={product.id} product={product} index={index} />
+          ))}
+        </div>
           <div className="flex items-center justify-center m-2">
             <button className="bg-red-500 text-white align-center m-3 px-5 py-4 hover:bg-red-300 hover:text-slate-800 duration-300 rounded font-montserrat">View all products</button>
           </div>
