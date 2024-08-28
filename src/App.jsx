@@ -9,6 +9,7 @@ import Account from './pages/Account';
 import Contact from './pages/Contact';
 import CartPage from './pages/Cart';
 import BillingPage from './pages/Billing';
+import AdminPanel from './pages/AdminPanel';
 
 const App = () => {
   return (
@@ -24,6 +25,7 @@ const App = () => {
           <Route path="/contact" element={<Contact/>} />
           <Route path="/cart" element={<CartPage/>} />
           <Route path="/billing" element={<BillingPage/>} />
+          <Route path="/admin" element={<AdminPanel/>} />
         </Routes>
         <Footer/>
       </div>

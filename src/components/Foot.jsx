@@ -24,6 +24,7 @@ const Footer = () => {
             <div className="mx-12">
               <h3 className="text-lg font-semibold mb-6">Quick Link</h3>
               <ul>
+                <li className="mb-3"><Link to="/admin" className="hover:text-gray-300">ADMIN PANEL</Link></li>
                 <li className="mb-3"><span className="hover:text-gray-300">Privacy Policy</span></li>
                 <li className="mb-3"><span className="hover:text-gray-300">Terms of Use</span></li>
                 <li className="mb-3"><span className="hover:text-gray-300">Contact</span></li>
