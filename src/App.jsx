@@ -16,6 +16,7 @@ import BillingPage from './pages/Billing';
 import PrivacyPolicy from './pages/Privacy';
 import PaymentsRefund from './pages/Payments';
 import ShippingPolicy from './pages/Shipping';
+import ForgotPassword from './pages/ForgotPassword';
 
 const ProtectedRoute = ({ children }) => {
   const { user } = useAuth();
@@ -43,7 +44,7 @@ const App = () => {
               <Route path="/privacy" element={<PrivacyPolicy />} />
               <Route path="/refund" element={<PaymentsRefund />} />
               <Route path="/shipping" element={<ShippingPolicy />} />
-              
+              <Route path="/forgot-password" element={<ForgotPassword />} />
               {/* Protected Routes */}
               <Route path="/acc" element={<ProtectedRoute><Account /></ProtectedRoute>} />
               <Route path="/cart" element={<ProtectedRoute><CartPage /></ProtectedRoute>} />
