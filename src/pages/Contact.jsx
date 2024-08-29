@@ -17,7 +17,7 @@ const Contact = () => {
             </h2>
             <p className="mb-2">We are available 24/7, 7 days a week.</p>
             <p>Phone:</p>
-            <p className="font-bold">+91(8882256992)</p>
+            <p className="font-bold">+91(9646951315)</p>
           </div>
           <hr />
           <div className='mt-4'>
@@ -28,7 +28,7 @@ const Contact = () => {
               Write To Us
             </h2>
             <p className="mb-2">Fill out our form and we will contact you within 24 hours.</p>
-            <p>Emails: contact@platypusbox.com</p>
+            <p>Emails:  contact@bookwormcorner.com</p>
           </div>
         </div>
       </div>

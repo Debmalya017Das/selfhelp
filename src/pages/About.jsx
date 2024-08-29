@@ -26,12 +26,12 @@ const About = () => {
         <div className="mx-6">
           <h1 className="font-montserrat font-bold text-3xl my-3">OUR STORY</h1>
           <p className="font-montserrat">
-            Welcome to SelfHelpHub, your ultimate destination for affordable books! Founded with a passion for literature and a mission to make reading accessible to everyone, we are dedicated to offering a wide selection of books at prices that won't break the bank.
+            Welcome to BookWormCorner, your ultimate destination for affordable books! Founded with a passion for literature and a mission to make reading accessible to everyone, we are dedicated to offering a wide selection of books at prices that won't break the bank.
           </p>
           
           <h3 className="font-montserrat font-bold text-2xl my-3">Our Mission</h3>
           <p className="font-montserrat">
-            At SelfHelpHub, we believe that knowledge and imagination should be within reach of every reader, regardless of budget constraints. Our mission is to democratize access to literature by curating a diverse collection of books spanning genres, interests, and ages, all at prices that are affordable for everyone.
+            At BookWormCorner, we believe that knowledge and imagination should be within reach of every reader, regardless of budget constraints. Our mission is to democratize access to literature by curating a diverse collection of books spanning genres, interests, and ages, all at prices that are affordable for everyone.
           </p>
 
           <h3 className="font-montserrat font-bold text-2xl my-3">What We Offer</h3>
@@ -55,7 +55,7 @@ const About = () => {
 
           <h3 className="font-montserrat font-bold text-2xl my-3">Our Promise</h3>
           <p className="font-montserrat">
-            When you shop at SelfHelpHub, you're not just buying books; you're joining a community of book lovers who believe in the power of storytelling and knowledge. We are committed to fostering a love for reading and making it accessible to all.
+            When you shop at BookWormCorner, you're not just buying books; you're joining a community of book lovers who believe in the power of storytelling and knowledge. We are committed to fostering a love for reading and making it accessible to all.
           </p>
         </div>
       </div>

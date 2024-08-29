@@ -13,7 +13,7 @@ const NavBar = () => {
       <div className="bg-black py-6"></div>
       <nav className="bg-white border border-b-black pt-3">
         <div className="container mx-auto px-4 py-3 flex justify-between items-center">
-          <h1 className="font-semibold lg:mx-16 font-montserrat text-2xl">SelfHelpHub</h1>
+          <h1 className="font-semibold lg:mx-16 font-montserrat text-2xl">BookWormCorner</h1>
           <div className="lg:hidden">
             <button onClick={toggleMenu} className="text-black text-2xl">
               &#9776; {/* Hamburger menu icon */}

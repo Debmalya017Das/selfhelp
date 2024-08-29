@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import  { useState, useEffect } from 'react';
 import { collection, addDoc, getDocs } from 'firebase/firestore';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
-import { db, storage } from '../components/firebase';
+import { db, storage } from './firebase';
 
 const AdminPanel = () => {
   const [products, setProducts] = useState([]);
@@ -44,7 +44,7 @@ const AdminPanel = () => {
       const imageUrl = await getDownloadURL(storageRef);
 
       // Add new product to Firestore
-      await addDoc(collection(db, "products"), {
+     addDoc(collection(db, "products"), {
         name: newProduct.name,
         price: newProduct.price,
         image: imageUrl

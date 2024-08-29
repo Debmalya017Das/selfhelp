@@ -25,23 +25,36 @@ const features = [
 const Home = () => {
   const [products, setProducts] = useState([]);
   const [hoveredIndex, setHoveredIndex] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  
+useEffect(() => {
+    fetchProducts();
+  }, []);
 
-  useEffect(() => {
   const fetchProducts = async () => {
+    console.log("Fetching products...");
     try {
+      setLoading(true);
       const querySnapshot = await getDocs(collection(db, "products"));
-      const productsData = querySnapshot.docs.map(doc => ({
-        id: doc.id,
-        ...doc.data()
-      }));
-      setProducts(productsData);
+      console.log("Query snapshot:", querySnapshot);
+      
+      if (querySnapshot.empty) {
+        console.log("No products found in the collection");
+        setProducts([]);
+      } else {
+        const productsData = querySnapshot.docs.map(doc => ({id: doc.id, ...doc.data() }));
+        console.log("Fetched products:", productsData);
+        setProducts(productsData);
+      }
+      
+      setLoading(false);
     } catch (error) {
       console.error("Error fetching products:", error);
+      setError("Failed to fetch products. Please try again later.");
+      setLoading(false);
     }
   };
-
-  fetchProducts();
-}, []);
 
   const ProductCard = ({ product, index }) => (
     <div 
@@ -67,7 +80,7 @@ const Home = () => {
       </button>
       <div className="flex flex-col items-left pt-1">
         <h3 className="text-lg font-semibold mb-2">{product.name}</h3>
-        <p className="text-gray-600 mb-4">{product.price}</p>
+        <p className="text-gray-600 mb-4">${product.price}</p>
       </div>
     </div>
   );
@@ -89,13 +102,21 @@ const Home = () => {
           <h2 className="items-left pt-3 mx-3 text-red-500 font-semibold font-montserrat">Our Products</h2>
         </div>        
 
-        <div className="py-8">
-          <h2 className="text-2xl font-bold mb-4 font-montserrat pb-4">Explore Our Products</h2>
+       <div className="py-8">
+        <h2 className="text-2xl font-bold mb-4 font-montserrat pb-4">Explore Our Products</h2>
+        {loading ? (
+          <p>Loading products...</p>
+        ) : error ? (
+          <p className="text-red-500">{error}</p>
+        ) : products.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {products.map((product, index) => (
-            <ProductCard key={product.id} product={product} index={index} />
-          ))}
-        </div>
+            {products.map((product, index) => (
+              <ProductCard key={product.id} product={product} index={index} />
+            ))}
+          </div>
+        ) : (
+          <p>No products found.</p>
+        )}
           <div className="flex items-center justify-center m-2">
             <button className="bg-red-500 text-white align-center m-3 px-5 py-4 hover:bg-red-300 hover:text-slate-800 duration-300 rounded font-montserrat">View all products</button>
           </div>
