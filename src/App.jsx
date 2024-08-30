@@ -17,6 +17,9 @@ import PrivacyPolicy from './pages/Privacy';
 import PaymentsRefund from './pages/Payments';
 import ShippingPolicy from './pages/Shipping';
 import ForgotPassword from './pages/ForgotPassword';
+import Other from './pages/Other.jsx';
+import Non_Fiction from './pages/Non_Fiction.jsx';
+import Fiction from './pages/Fiction.jsx';
 
 const ProtectedRoute = ({ children }) => {
   const { user } = useAuth();
@@ -45,6 +48,9 @@ const App = () => {
               <Route path="/refund" element={<PaymentsRefund />} />
               <Route path="/shipping" element={<ShippingPolicy />} />
               <Route path="/forgot-password" element={<ForgotPassword />} />
+              <Route path="/fiction" element={<Fiction/>} />
+              <Route path="/nonfiction" element={<Non_Fiction/>} />
+              <Route path="/others" element={<Other/>} />
               {/* Protected Routes */}
               <Route path="/acc" element={<ProtectedRoute><Account /></ProtectedRoute>} />
               <Route path="/cart" element={<ProtectedRoute><CartPage /></ProtectedRoute>} />

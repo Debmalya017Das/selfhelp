@@ -4,11 +4,16 @@ import { useAuth } from '../contexts/AuthContext';
 
 const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
   const { user, logout } = useAuth();
   const navigate = useNavigate();
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
+  };
+
+  const toggleDropdown = () => {
+    setDropdownOpen(!dropdownOpen);
   };
 
   const handleLogout = async () => {
@@ -25,7 +30,8 @@ const NavBar = () => {
       <div className="bg-black py-6"></div>
       <nav className="bg-white border border-b-black pt-3">
         <div className="container mx-auto px-4 py-3 flex justify-between items-center">
-          <h1 className="font-semibold lg:mx-16 font-montserrat text-2xl">BookWormCorner</h1>
+          <NavLink to="/"><h1 className="font-semibold lg:mx-16 font-montserrat text-2xl">BookWormCorner</h1>
+          </NavLink>
           <div className="lg:hidden">
             <button onClick={toggleMenu} className="text-black text-2xl">
               &#9776;
@@ -33,14 +39,32 @@ const NavBar = () => {
           </div>
           {/* Desktop Menu */}
           <ul className="hidden lg:flex lg:space-x-12 md:space-x-6 lg:ml-8 font-montserrat text-black">
-            <NavLink to="/"><li>Home</li></NavLink>
+            <li className="relative">
+              <button 
+                onClick={toggleDropdown} 
+                className="focus:outline-none">
+                Home
+              </button>
+              {dropdownOpen && (
+                <ul className="absolute top-full mt-2 bg-white border rounded shadow-lg w-40">
+                  <li className="hover:bg-gray-200">
+                    <NavLink to="/fiction" className="block px-4 py-2">Fiction</NavLink>
+                  </li>
+                  <li className="hover:bg-gray-200">
+                    <NavLink to="/nonfiction" className="block px-4 py-2">Non-Fiction</NavLink>
+                  </li>
+                  <li className="hover:bg-gray-200">
+                    <NavLink to="/others" className="block px-4 py-2">Others</NavLink>
+                  </li>
+                </ul>
+              )}
+            </li>
             <NavLink to="/contact"><li>Contact</li></NavLink>
             <NavLink to="/about"><li>About</li></NavLink>
             {user ? (
               <li><button onClick={handleLogout}>Logout</button></li>
             ) : (
               <>
-                {/* <NavLink to="/login"><li>Login</li></NavLink> */}
                 <NavLink to="/signup"><li>Signup</li></NavLink>
               </>
             )}
@@ -63,7 +87,24 @@ const NavBar = () => {
         {/* Mobile Menu */}
         <div className={`lg:hidden ${isOpen ? 'block' : 'hidden'}`}>
           <ul className="flex flex-col space-y-2 p-4">
-            <NavLink to="/"><li>Home</li></NavLink>
+            <li className="relative">
+              <button onClick={toggleDropdown} className="focus:outline-none">
+                Home
+              </button>
+              {dropdownOpen && (
+                <ul className="pl-4 mt-2">
+                  <li className="hover:bg-gray-200">
+                    <NavLink to="/fiction" className="block px-4 py-2">Fiction</NavLink>
+                  </li>
+                  <li className="hover:bg-gray-200">
+                    <NavLink to="/non-fiction" className="block px-4 py-2">Non-Fiction</NavLink>
+                  </li>
+                  <li className="hover:bg-gray-200">
+                    <NavLink to="/others" className="block px-4 py-2">Others</NavLink>
+                  </li>
+                </ul>
+              )}
+            </li>
             <NavLink to="/contact"><li>Contact</li></NavLink>
             <NavLink to="/about"><li>About</li></NavLink>
             {user ? (

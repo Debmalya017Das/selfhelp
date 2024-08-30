@@ -66,8 +66,11 @@ const Home = () => {
         />
       </div>
       <div className="lg:mx-24 my-10">
-        <div className="py-8">
-          <h2 className="text-2xl font-bold mb-4 font-montserrat pb-4">Explore Our Products</h2>
+         <div className="items-left flex">
+          <button className="bg-red-500 rounded px-3 py-5"></button>
+          <h2 className="items-left pt-3 mx-3 text-black text-2xl font-semibold font-montserrat">Our Products</h2>
+        </div>     
+        <div className="py-8 ">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {products.map((product, index) => (
               <div 
