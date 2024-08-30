@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from '../components/firebase';
 import NavBar from '../components/Nav';
-// import { getDownloadURL, ref } from "firebase/storage";
 import sh from "./image/image.png";
 
 const features = [
@@ -46,10 +45,10 @@ const Home = () => {
     }
   };
 
-
   return (
     <>
       <NavBar />
+      {/* Rest of the component remains the same */}
       <div className="flex items-center justify-center py-8">
         <img 
           src={sh}
@@ -58,11 +57,7 @@ const Home = () => {
         />
       </div>
       <div className="lg:mx-24 my-10">
-        <div className="items-left flex">
-          <button className="bg-red-500 rounded px-3 py-5"></button>
-          <h2 className="items-left pt-3 mx-3 text-red-500 font-semibold font-montserrat">Our Products</h2>
-        </div>        
-
+        {/* Product display section */}
         <div className="py-8">
           <h2 className="text-2xl font-bold mb-4 font-montserrat pb-4">Explore Our Products</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -102,8 +97,8 @@ const Home = () => {
           </div>
         </div>
         
+        {/* Features section */}
         <div className="mt-10"><hr /></div>
-
         <div className="flex justify-center lg:space-x-24 py-10">
           {features.map((feature, index) => (
             <div key={index} className="text-center w-64 font-montserrat">

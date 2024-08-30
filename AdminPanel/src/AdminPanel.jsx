@@ -1,14 +1,13 @@
-import  { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { collection, addDoc, getDocs } from 'firebase/firestore';
-import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
-import { db, storage } from './firebase';
+import { db } from './firebase';
 
 const AdminPanel = () => {
   const [products, setProducts] = useState([]);
   const [newProduct, setNewProduct] = useState({
     name: '',
     price: '',
-    image: null
+    imageUrl: ''
   });
 
   useEffect(() => {
@@ -26,32 +25,23 @@ const AdminPanel = () => {
     setNewProduct(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleImageChange = (e) => {
-    setNewProduct(prev => ({ ...prev, image: e.target.files[0] }));
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!newProduct.name || !newProduct.price || !newProduct.image) {
+    if (!newProduct.name || !newProduct.price || !newProduct.imageUrl) {
       alert('Please fill all fields');
       return;
     }
 
     try {
-      // Upload image to Firebase Storage
-      const storageRef = ref(storage, `product_images/${newProduct.image.name}`);
-      await uploadBytes(storageRef, newProduct.image);
-      const imageUrl = await getDownloadURL(storageRef);
-
       // Add new product to Firestore
-     addDoc(collection(db, "products"), {
+      await addDoc(collection(db, "products"), {
         name: newProduct.name,
         price: newProduct.price,
-        image: imageUrl
+        image: newProduct.imageUrl
       });
 
       alert('Product added successfully!');
-      setNewProduct({ name: '', price: '', image: null });
+      setNewProduct({ name: '', price: '', imageUrl: '' });
       fetchProducts();
     } catch (error) {
       console.error("Error adding product: ", error);
@@ -89,12 +79,13 @@ const AdminPanel = () => {
           />
         </div>
         <div className="mb-4">
-          <label htmlFor="image" className="block mb-2">Image</label>
+          <label htmlFor="imageUrl" className="block mb-2">Image URL</label>
           <input
-            type="file"
-            id="image"
-            name="image"
-            onChange={handleImageChange}
+            type="url"
+            id="imageUrl"
+            name="imageUrl"
+            value={newProduct.imageUrl}
+            onChange={handleInputChange}
             className="w-full p-2 border rounded"
             required
           />
