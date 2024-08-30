@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect ,useContext} from "react";
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from '../components/firebase';
 import NavBar from '../components/Nav';
 import sh from "./image/image.png";
+import { CartContext } from '../contexts/CartContext';
 
 const features = [
   {
@@ -25,6 +26,7 @@ const features = [
 const Home = () => {
   const [products, setProducts] = useState([]);
   const [hoveredIndex, setHoveredIndex] = useState(null);
+   const { addToCart } = useContext(CartContext);
 
   useEffect(() => {
     fetchProducts();
@@ -45,6 +47,13 @@ const Home = () => {
     }
   };
 
+   const handleAddToCart = (product) => {
+    addToCart(product);
+    alert("Added to cart");
+    // Optionally, you can add some visual feedback here, like a toast notification
+  };
+
+
   return (
     <>
       <NavBar />
@@ -57,7 +66,6 @@ const Home = () => {
         />
       </div>
       <div className="lg:mx-24 my-10">
-        {/* Product display section */}
         <div className="py-8">
           <h2 className="text-2xl font-bold mb-4 font-montserrat pb-4">Explore Our Products</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -81,6 +89,7 @@ const Home = () => {
                   className={`w-full bg-black text-white font-bold py-2 rounded-b-lg transition-opacity duration-300 ${
                     hoveredIndex === index ? 'opacity-100' : 'opacity-0'
                   }`}
+                  onClick={() => handleAddToCart(product)}
                 >
                   Add to Cart
                 </button>
