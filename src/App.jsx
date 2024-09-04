@@ -40,7 +40,6 @@ const App = () => {
           <div>
             <Routes>
               <Route path="/" element={<Home />} />
-              <Route path="/wishlist" element={<Wishlist />} />
               <Route path="/signup" element={<SignUp />} />
               <Route path="/login" element={<Login />} />
               <Route path="/about" element={<About />} />
@@ -54,6 +53,7 @@ const App = () => {
               <Route path="/others" element={<Other/>} />
               <Route path="/brand" element={<Brand/>} />
               {/* Protected Routes */}
+              <Route path="/wishlist" element={<ProtectedRoute><Wishlist /></ProtectedRoute>} />
               <Route path="/acc" element={<ProtectedRoute><Account /></ProtectedRoute>} />
               <Route path="/cart" element={<ProtectedRoute><CartPage /></ProtectedRoute>} />
               <Route path="/billing" element={<ProtectedRoute><BillingPage /></ProtectedRoute>} />

@@ -78,11 +78,11 @@ const NavBar = () => {
         {/* Mobile Menu */}
         <div className={`lg:hidden ${isOpen ? 'block' : 'hidden'}`}>
           <ul className="flex flex-col space-y-2 p-4">
-            <li className="relative">
+            {/* <li className="relative"> */}
              <NavLink to="/"><li className="focus:outline-none">
                 Home
               </li></NavLink> 
-            </li>
+            {/* </li> */}
             <NavLink to="/contact"><li>Contact</li></NavLink>
             <NavLink to="/about"><li>About</li></NavLink>
             {user ? (

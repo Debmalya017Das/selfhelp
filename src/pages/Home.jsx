@@ -4,7 +4,9 @@ import { db } from '../components/firebase';
 import NavBar from '../components/Nav';
 import sh from "./image/image.png";
 import { CartContext } from '../contexts/CartContext';
+import { WishlistContext } from '../contexts/WishlistContext';
 import { Link } from 'react-router-dom';
+
 
 const features = [
   {
@@ -29,6 +31,7 @@ const Home = () => {
   const [hoveredIndex, setHoveredIndex] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState("All");
   const { addToCart } = useContext(CartContext);
+  const { addToWishlist } = useContext(WishlistContext);
   const [visibleRows, setVisibleRows] = useState(3); // Initial number of rows to show
 
   useEffect(() => {
@@ -56,6 +59,10 @@ const Home = () => {
     alert("Added to cart");
   };
 
+   const handleaddToWishlist = (product) => {
+    addToWishlist(product);
+    alert("Wishlisted");
+  };
    const handleLoadMore = () => {
     setVisibleRows(prev => prev + 3); // Show 3 more rows upon clicking the button
   };
@@ -117,6 +124,12 @@ const Home = () => {
                 onClick={() => handleAddToCart(product)}
               >
                 Add to Cart
+              </button>
+              <button
+                className="bg-red-500 text-white font-bold py-2 mt-2 rounded transition-opacity duration-300"
+                onClick={() => handleaddToWishlist(product)}
+              >
+                Add to Wishlist
               </button>
               <div className="flex flex-col items-left pt-1">
                 <h3 className="text-lg font-semibold mb-2">{product.name}</h3>
