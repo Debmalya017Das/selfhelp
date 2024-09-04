@@ -24,6 +24,12 @@ function CartPage() {
     return acc + (item.discountedPrice || item.price) * quantity;
   }, 0);
 
+  // Delivery fee logic
+  const deliveryFee = subtotal >= 500 ? 0 : 20; // Assuming $20 as default delivery fee
+
+  // Total including delivery fee
+  const total = subtotal + deliveryFee;
+
   return (
     <>
       <NavBar />
@@ -80,7 +86,7 @@ function CartPage() {
         {/* Buttons */}
         <div className="flex justify-between mb-8">
           <NavLink to="/" className="border border-black px-4 py-2 rounded">Return To Shop</NavLink>
-          <button className="border border-black px-4 py-2 rounded">Update Cart</button>
+          {/* <button className="border border-black px-4 py-2 rounded">Update Cart</button> */}
         </div>
 
         {/* Coupon and Cart Total */}
@@ -98,12 +104,12 @@ function CartPage() {
               <span>${subtotal.toFixed(2)}</span>
             </div>
             <div className="flex justify-between mb-2">
-              <span>Shipping:</span>
-              <span>Free</span>
+              <span>Delivery fee:</span>
+              <span>${deliveryFee.toFixed(2)}</span>
             </div>
             <div className="flex justify-between font-bold mb-4">
               <span>Total:</span>
-              <span>${subtotal.toFixed(2)}</span>
+              <span>${total.toFixed(2)}</span>
             </div>
             <NavLink to="/billing">
               <button className="bg-red-500 text-white w-full py-2 rounded">Proceed to checkout</button>
