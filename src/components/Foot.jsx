@@ -1,6 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTelegram, faInstagram, faFacebook } from '@fortawesome/free-brands-svg-icons';
 import { Link } from 'react-router-dom';
+import logo from '../pages/image/logo3.png'
 
 const Footer = () => {
   return (
@@ -9,7 +10,10 @@ const Footer = () => {
         <div className="flex flex-col md:flex-row">
           {/* Logo and Brand Policy */}
           <div className="md:w-1/3 mb-8 md:mb-0 pl-7">
-            <h2 className="text-4xl font-bold lg:pl-8">BookWormCorner</h2>
+           <Link to="/">
+          {/* <h1 className="font-semibold lg:mx-16 font-montserrat text-2xl">BookWormCorner</h1> */}
+          <img src={logo}  className="w-1/2 h-1/2 flex"alt="" />
+          </Link>
             <ul className="pl-10 mt-4">
               <li className="mb-3">
                 <Link to="/brand" className="hover:text-gray-300">Brand Story</Link>

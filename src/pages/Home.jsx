@@ -1,9 +1,10 @@
-import React, { useState, useEffect ,useContext} from "react";
-import { collection, getDocs } from 'firebase/firestore';
+import React, { useState, useEffect, useContext } from "react";
+import { collection, getDocs, query, where } from 'firebase/firestore';
 import { db } from '../components/firebase';
 import NavBar from '../components/Nav';
 import sh from "./image/image.png";
 import { CartContext } from '../contexts/CartContext';
+import { Link } from 'react-router-dom';
 
 const features = [
   {
@@ -26,32 +27,40 @@ const features = [
 const Home = () => {
   const [products, setProducts] = useState([]);
   const [hoveredIndex, setHoveredIndex] = useState(null);
-   const { addToCart } = useContext(CartContext);
+  const [selectedCategory, setSelectedCategory] = useState("All");
+  const { addToCart } = useContext(CartContext);
+  const [visibleRows, setVisibleRows] = useState(3); // Initial number of rows to show
 
   useEffect(() => {
     fetchProducts();
-  }, []);
+  }, [selectedCategory]);
 
-  const fetchProducts = async () => {
+ const fetchProducts = async () => {
     try {
-      console.log("Fetching products...");
-      const querySnapshot = await getDocs(collection(db, "products"));
-      console.log("Query snapshot:", querySnapshot);
-      console.log("Number of documents:", querySnapshot.size);
-
+      let q;
+      if (selectedCategory === "All") {
+        q = collection(db, "products");
+      } else {
+        q = query(collection(db, "products"), where("category", "==", selectedCategory.toLowerCase()));
+      }
+      const querySnapshot = await getDocs(q);
       const productsData = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-      console.log("Fetched products:", productsData);
       setProducts(productsData);
     } catch (error) {
       console.error("Error fetching products:", error);
     }
   };
 
-   const handleAddToCart = (product) => {
+  const handleAddToCart = (product) => {
     addToCart(product);
     alert("Added to cart");
-    // Optionally, you can add some visual feedback here, like a toast notification
   };
+
+   const handleLoadMore = () => {
+    setVisibleRows(prev => prev + 3); // Show 3 more rows upon clicking the button
+  };
+
+  const productsToShow = products.slice(0, visibleRows * 3); // Calculate products to show based on rows
 
 
   return (
@@ -66,48 +75,68 @@ const Home = () => {
         />
       </div>
       <div className="lg:mx-24 my-10">
-         <div className="items-left flex">
-          <button className="bg-red-500 rounded px-3 py-5"></button>
-          <h2 className="items-left pt-3 mx-3 text-black text-2xl font-semibold font-montserrat">Our Products</h2>
-        </div>     
-        <div className="py-8 ">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {products.map((product, index) => (
-              <div 
-                key={product.id} 
-                className="relative product-card flex flex-col justify-between h-full"
-                onMouseEnter={() => setHoveredIndex(index)}
-                onMouseLeave={() => setHoveredIndex(null)}
-              >
-                <div className="flex-grow flex items-center border border-slate-300 justify-center bg-slate-100 rounded-lg shadow-md p-4 hover:shadow-lg transition-shadow duration-300">
-                  <img
-                    src={product.image}
-                    alt={product.name}
-                    className={`w-full h-5/7 object-cover transition-opacity duration-300 rounded ${
-                      hoveredIndex === index ? 'opacity-65' : 'opacity-full'
-                    }`}
-                  />
-                </div>
-                <button 
-                  className={`w-full bg-black text-white font-bold py-2 rounded-b-lg transition-opacity duration-300 ${
-                    hoveredIndex === index ? 'opacity-100' : 'opacity-0'
+         <div className="flex justify-between items-center">
+          <div className="flex items-center">
+            <button className="bg-red-500 rounded px-3 py-5"></button>
+            <h2 className="items-left pt-3 mx-3 text-black text-2xl font-semibold font-montserrat">Our Products</h2>
+          </div>
+          <select 
+            value={selectedCategory}
+            onChange={(e) => setSelectedCategory(e.target.value)}
+            className="p-2 border rounded"
+          >
+            <option value="All">All</option>
+            <option value="Fiction">Fiction</option>
+            <option value="Non-Fiction">Non-Fiction</option>
+            <option value="Other">Other</option>
+          </select>
+        </div> 
+  
+        <div className="py-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          {productsToShow.map((product, index) => (
+            <div
+              key={product.id}
+              className="relative product-card flex flex-col justify-between h-full"
+              onMouseEnter={() => setHoveredIndex(index)}
+              onMouseLeave={() => setHoveredIndex(null)}
+            >
+              <div className="flex-grow flex items-center border border-slate-300 justify-center bg-slate-100 rounded-lg shadow-md p-4 hover:shadow-lg transition-shadow duration-300">
+                <img
+                  src={product.image}
+                  alt={product.name}
+                  className={`w-full h-5/7 object-cover transition-opacity duration-300 rounded ${
+                    hoveredIndex === index ? 'opacity-65' : 'opacity-full'
                   }`}
-                  onClick={() => handleAddToCart(product)}
-                >
-                  Add to Cart
-                </button>
-                <div className="flex flex-col items-left pt-1">
-                  <h3 className="text-lg font-semibold mb-2">{product.name}</h3>
-                  <p className="text-gray-600 mb-4">${product.price}</p>
-                </div>
+                />
               </div>
-            ))}
-          </div>
-          
-          <div className="flex items-center justify-center m-2">
-            <button className="bg-red-500 text-white align-center m-3 px-5 py-4 hover:bg-red-300 hover:text-slate-800 duration-300 rounded font-montserrat">View all products</button>
-          </div>
+              <button
+                className={`w-full bg-black text-white font-bold py-2 rounded-b-lg transition-opacity duration-300 ${
+                  hoveredIndex === index ? 'opacity-100' : 'opacity-0'
+                }`}
+                onClick={() => handleAddToCart(product)}
+              >
+                Add to Cart
+              </button>
+              <div className="flex flex-col items-left pt-1">
+                <h3 className="text-lg font-semibold mb-2">{product.name}</h3>
+                <p className="text-gray-600 mb-4">${product.price}</p>
+              </div>
+            </div>
+          ))}
         </div>
+
+        {visibleRows * 2 < products.length && (
+          <div className="flex items-center justify-center m-2">
+            <button
+              className="bg-red-500 text-white align-center m-3 px-5 py-4 hover:bg-red-300 hover:text-slate-800 duration-300 rounded font-montserrat"
+              onClick={handleLoadMore}
+            >
+              View all products
+            </button>
+          </div>
+        )}
+      </div>
         
         {/* Features section */}
         <div className="mt-10"><hr /></div>

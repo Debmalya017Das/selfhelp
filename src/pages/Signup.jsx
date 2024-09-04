@@ -16,6 +16,7 @@ const SignUp = () => {
     e.preventDefault();
     try {
       await createUserWithEmailAndPassword(auth, email, password);
+       alert("Account created successfully");
       // You might want to store the user's name in a database or user profile here
       navigate('/');
     } catch (error) {

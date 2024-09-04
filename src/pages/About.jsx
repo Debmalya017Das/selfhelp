@@ -1,5 +1,5 @@
 import React from 'react';
-import NavBar from '../components/Nav3';
+import NavBar from '../components/Nav';
 
 const features = [
     {
@@ -22,7 +22,7 @@ const About = () => {
   return (
     <>
       <NavBar />
-      <div className="grid grid-cols-2 p-4">
+      <div className="grid grid-cols-1 p-4">
         <div className="mx-6">
           <h1 className="font-montserrat font-bold text-3xl my-3">OUR STORY</h1>
           <p className="font-montserrat">

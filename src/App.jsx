@@ -20,6 +20,7 @@ import ForgotPassword from './pages/ForgotPassword';
 import Other from './pages/Other.jsx';
 import Non_Fiction from './pages/Non_Fiction.jsx';
 import Fiction from './pages/Fiction.jsx';
+import Brand from './pages/BrandStory.jsx';
 
 const ProtectedRoute = ({ children }) => {
   const { user } = useAuth();
@@ -51,6 +52,7 @@ const App = () => {
               <Route path="/fiction" element={<Fiction/>} />
               <Route path="/nonfiction" element={<Non_Fiction/>} />
               <Route path="/others" element={<Other/>} />
+              <Route path="/brand" element={<Brand/>} />
               {/* Protected Routes */}
               <Route path="/acc" element={<ProtectedRoute><Account /></ProtectedRoute>} />
               <Route path="/cart" element={<ProtectedRoute><CartPage /></ProtectedRoute>} />

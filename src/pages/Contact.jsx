@@ -1,5 +1,5 @@
 import React from 'react'
-import NavBar from '../components/Nav3';
+import NavBar from '../components/Nav';
 
 const Contact = () => {
   return (
