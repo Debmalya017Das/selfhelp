@@ -1,33 +1,71 @@
-import React, { useState, useContext } from 'react';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { auth } from '../components/firebase';
-import { AuthContext } from '../contexts/AuthContext';
-import { Link, useNavigate } from 'react-router-dom';
+// import React, { useState, useContext } from 'react';
+// import { createUserWithEmailAndPassword } from 'firebase/auth';
+// import { auth } from '../components/firebase';
+// import { AuthContext } from '../contexts/AuthContext';
+// import { Link, useNavigate } from 'react-router-dom';
+// import NavBar from '../components/Nav2';
+
+// const SignUp = () => {
+//   const [name, setName] = useState('');
+//   const [email, setEmail] = useState('');
+//   const [password, setPassword] = useState('');
+//   const { signUpWithGoogle } = useContext(AuthContext);
+//   const navigate = useNavigate();
+
+//   const handleSignUp = async (e) => {
+//     e.preventDefault();
+//     try {
+//       await createUserWithEmailAndPassword(auth, email, password);
+//       alert("Account created successfully");
+//       // You might want to store the user's name in a database or user profile here
+//       navigate('/');
+//     } catch (error) {
+//       console.error('Signup error:', error.message);
+//       // Handle error (e.g., display error message to user)
+//     }
+//   };
+import React, { useState,useContext } from 'react';
+import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
+import { auth, db } from '../components/firebase';
+import { useNavigate,Link  } from 'react-router-dom';
+import { AuthContext} from '../contexts/AuthContext';
 import NavBar from '../components/Nav2';
+import { doc, setDoc } from 'firebase/firestore';
+import { useUser } from '../hooks/useUser';
 
 const SignUp = () => {
+  const { setCurrentUser } = useUser();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const { signUpWithGoogle } = useContext(AuthContext);
+   const { signUpWithGoogle } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const handleSignUp = async (e) => {
     e.preventDefault();
     try {
-      await createUserWithEmailAndPassword(auth, email, password);
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      await updateProfile(userCredential.user, { displayName: name });
+      
+      await setDoc(doc(db, 'users', userCredential.user.uid), {
+        name,
+        email,
+        createdAt: new Date(),
+      });
+
+      setCurrentUser(userCredential.user);
       alert("Account created successfully");
-      // You might want to store the user's name in a database or user profile here
       navigate('/');
     } catch (error) {
       console.error('Signup error:', error.message);
-      // Handle error (e.g., display error message to user)
+      alert(error.message);
     }
   };
 
   const handleGoogleSignUp = async () => {
     try {
       await signUpWithGoogle();
+      setCurrentUser(userCredential.user);
       alert("Account created successfully");
       navigate('/');
       alert("Account created successfully");

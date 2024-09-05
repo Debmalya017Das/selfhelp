@@ -4,24 +4,38 @@ import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../components/firebase';
 import { Link, useNavigate } from 'react-router-dom';
 import NavBar from '../components/Nav2';
+import { useUser } from '../hooks/useUser';
+
 
 const Login = () => {
   const { loginWithGoogle } = useContext(AuthContext);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
+   const { setCurrentUser } = useUser();
 
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
       await signInWithEmailAndPassword(auth, email, password);
+      // setCurrentUser(userCredential.user);
       alert("Logged in Successfully")
       navigate('/');
     } catch (error) {
       console.error('Login error:', error.message);
     }
   };
+const handlegooglelogin = async(e) =>{
+  e.preventDefault();
+  try{
+    await loginWithGoogle();
+    alert("Login success");
+    navigate('/');
 
+  }catch(error){
+    console.error('Login error:', error.message);
+  }
+}
   return (
     <>
       <NavBar/>
@@ -64,7 +78,7 @@ const Login = () => {
               </form>
               <button
                 type="button"
-                onClick={loginWithGoogle}
+                onClick={handlegooglelogin}
                 className="bg-blue-500 text-white p-2 w-full rounded mt-2 font-montserrat"
               >
                 Login with Google
