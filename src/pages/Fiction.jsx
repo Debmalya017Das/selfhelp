@@ -24,9 +24,9 @@ function Fiction() {
   return (
     <>
       <NavBar/>
-      <div className="container my-36">  
+      <div className="container my-12">  
         <h2 className='text-center font-montserrat text-3xl mb-8'>Fiction</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:mx-8 md:mx-2 sm:mx-2">
           {products.map((product) => (
             <div key={product.id} className="border p-4 rounded">
               <img src={product.image} alt={product.name} className="w-full h-48 object-cover mb-2" />

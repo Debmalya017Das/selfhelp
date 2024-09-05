@@ -99,8 +99,8 @@ const Home = () => {
           </select>
         </div> 
   
-        <div className="py-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="py-8 ">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 ">
           {productsToShow.map((product, index) => (
             <div
               key={product.id}
@@ -108,7 +108,7 @@ const Home = () => {
               onMouseEnter={() => setHoveredIndex(index)}
               onMouseLeave={() => setHoveredIndex(null)}
             >
-              <div className="flex-grow flex items-center border border-slate-300 justify-center bg-slate-100 rounded-lg shadow-md p-4 hover:shadow-lg transition-shadow duration-300">
+              <div className="flex-grow flex items-center border border-slate-300 justify-center bg-slate-100 rounded-lg shadow-md p-4 hover:shadow-lg transition-shadow duration-300 md:mx-4 lg:mx-2">
                 <img
                   src={product.image}
                   alt={product.name}

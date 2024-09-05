@@ -1,4 +1,3 @@
-// src/components/AuthContext.jsx
 import React, { createContext, useState, useEffect, useContext } from 'react';
 import { auth, googleProvider} from '../components/firebase';
 import {  signInWithPopup, onAuthStateChanged, signOut, GoogleAuthProvider} from 'firebase/auth';
@@ -22,7 +21,6 @@ export const AuthProvider = ({ children }) => {
    const signUpWithGoogle = async () => {
     try {
       const result = await signInWithPopup(auth, googleProvider);
-      // alert("Account created successfully");
       setUser(result.user);
       alert("Account created successfully");
       return result.user;
@@ -31,9 +29,8 @@ export const AuthProvider = ({ children }) => {
       throw error;
     }
   };
-  // const loginWithGoogle = () => signInWithPopup(auth, googleProvider);
 
-    const logout = async () => {
+  const logout = async () => {
     try {
       await signOut(auth);
       setUser(null);

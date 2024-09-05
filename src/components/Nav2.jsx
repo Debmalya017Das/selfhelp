@@ -26,7 +26,7 @@ const NavBar = () => {
           {/* Desktop Menu */}
           <ul className="hidden lg:flex lg:space-x-12 md:space-x-6 lg:ml-8 font-montserrat text-black">
             <NavLink to="/"><li>Home</li></NavLink>
-            <NavLink to="/contact"><li>Contact</li></NavLink>
+            {/* <NavLink to="/contact"><li>Contact</li></NavLink> */}
             <NavLink to="/about"><li>About</li></NavLink>
             <NavLink to="/signup"><li>Signup</li></NavLink>
           </ul>
@@ -39,7 +39,7 @@ const NavBar = () => {
         <div className={`lg:hidden ${isOpen ? 'block' : 'hidden'}`}>
           <ul className="flex flex-col space-y-2 p-4">
             <NavLink to="/home"><li>Home</li></NavLink>
-            <NavLink to="/contact"><li>Contact</li></NavLink>
+            {/* <NavLink to="/contact"><li>Contact</li></NavLink> */}
             <NavLink to="/about"><li>About</li></NavLink>
             <NavLink to="/signup"><li>Signup</li></NavLink>
           </ul>

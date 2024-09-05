@@ -2,8 +2,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTelegram, faInstagram, faFacebook } from '@fortawesome/free-brands-svg-icons';
 import { Link } from 'react-router-dom';
 import logo from '../pages/image/logo3.png'
+import { useAuth } from '../contexts/AuthContext';
 
 const Footer = () => {
+  const {user}=useAuth();
   return (
     <footer className="bg-slate-950 text-white pt-10 pb-16 bg-cover bg-center rounded-t-[15px]">
       <div className="container mx-auto px-4">
@@ -34,8 +36,13 @@ const Footer = () => {
               <ul>
                 <li className="mb-3"><Link to="/acc" className="hover:text-gray-300">My Account</Link></li>
                 <li className="mb-3"><Link to="/login" className="hover:text-gray-300">Login / Register</Link></li>
-                <li className="mb-3"><Link to="/cart" className="hover:text-gray-300">Cart</Link></li>
+               {user && (
+                <>
+                   <li className="mb-3"><Link to="/cart" className="hover:text-gray-300">Cart</Link></li>
                 <li className="mb-3"><Link to="/wishlist" className="hover:text-gray-300">Wishlist</Link></li>
+               </>              
+               )}
+               
               </ul>
             </div>
 
