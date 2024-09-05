@@ -22,9 +22,9 @@ export const AuthProvider = ({ children }) => {
    const signUpWithGoogle = async () => {
     try {
       const result = await signInWithPopup(auth, googleProvider);
-      alert("Account created successfully");
+      // alert("Account created successfully");
       setUser(result.user);
-      
+      alert("Account created successfully");
       return result.user;
     } catch (error) {
       console.error('Google sign-up error:', error.message);

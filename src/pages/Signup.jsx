@@ -16,7 +16,7 @@ const SignUp = () => {
     e.preventDefault();
     try {
       await createUserWithEmailAndPassword(auth, email, password);
-       alert("Account created successfully");
+      alert("Account created successfully");
       // You might want to store the user's name in a database or user profile here
       navigate('/');
     } catch (error) {
@@ -30,6 +30,7 @@ const SignUp = () => {
       await signUpWithGoogle();
       alert("Account created successfully");
       navigate('/');
+      alert("Account created successfully");
     } catch (error) {
       console.error('Google sign-up error:', error.message);
       // Handle error (e.g., display error message to user)
