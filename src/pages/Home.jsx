@@ -133,7 +133,7 @@ const Home = () => {
               </button>
               <div className="flex flex-col items-left pt-1">
                 <h3 className="text-lg font-semibold mb-2">{product.name}</h3>
-                <p className="text-gray-600 mb-4"><i class="fa fa-inr"></i>{product.price}</p>
+                <p className="text-gray-600 mb-4"><i className="fa fa-inr"></i>{product.price}</p>
               </div>
             </div>
           ))}

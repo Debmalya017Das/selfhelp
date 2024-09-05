@@ -25,7 +25,7 @@ function CartPage() {
   }, 0);
 
   // Delivery fee logic
-  const deliveryFee = subtotal >= 500 ? 0 : 20; // Assuming <i class="fa fa-inr"></i>20 as default delivery fee
+  const deliveryFee = subtotal >= 500 ? 0 : 20; // Assuming <i className="fa fa-inr"></i>20 as default delivery fee
 
   // Total including delivery fee
   const total = subtotal + deliveryFee;
@@ -57,7 +57,7 @@ function CartPage() {
                     <img src={item.image} alt={item.title} className="w-16 h-16 mr-4" />
                     <span>{item.title}</span>
                   </td>
-                  <td><i class="fa fa-inr"></i>{item.discountedPrice || item.price}</td>
+                  <td><i className="fa fa-inr"></i>{item.discountedPrice || item.price}</td>
                   <td>
                     <select
                       className="border p-1"
@@ -69,7 +69,7 @@ function CartPage() {
                       ))}
                     </select>
                   </td>
-                  <td className="text-right"><i class="fa fa-inr"></i>{(item.discountedPrice || item.price) * (quantities[index] || 1)}</td>
+                  <td className="text-right"><i className="fa fa-inr"></i>{(item.discountedPrice || item.price) * (quantities[index] || 1)}</td>
                   <td className="text-right">
                     <button onClick={() => removeFromCart(item.id)} className="text-red-500">
                       <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -101,15 +101,15 @@ function CartPage() {
             <h2 className="font-bold mb-4">Cart Total</h2>
             <div className="flex justify-between mb-2">
               <span>Subtotal:</span>
-              <span><i class="fa fa-inr"></i>{subtotal.toFixed(2)}</span>
+              <span><i className="fa fa-inr"></i>{subtotal.toFixed(2)}</span>
             </div>
             <div className="flex justify-between mb-2">
               <span>Delivery fee:</span>
-              <span><i class="fa fa-inr"></i>{deliveryFee.toFixed(2)}</span>
+              <span><i className="fa fa-inr"></i>{deliveryFee.toFixed(2)}</span>
             </div>
             <div className="flex justify-between font-bold mb-4">
               <span>Total:</span>
-              <span><i class="fa fa-inr"></i>{total.toFixed(2)}</span>
+              <span><i className="fa fa-inr"></i>{total.toFixed(2)}</span>
             </div>
             <NavLink to="/billing">
               <button className="bg-red-500 text-white w-full py-2 rounded">Proceed to checkout</button>

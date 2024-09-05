@@ -29,8 +29,8 @@ const ProductCard = ({ id,image, title, price, discountedPrice, rating, reviews,
       </div>
       <h3 className="font-semibold mb-1">{title}</h3>
       <div className="flex items-center mb-2">
-        <span className="text-red-500 font-bold mr-2"><i class="fa fa-inr"></i>{discountedPrice || price}</span>
-        {discountedPrice && <span className="text-gray-500 line-through text-sm"><i class="fa fa-inr"></i>{price}</span>}
+        <span className="text-red-500 font-bold mr-2"><i className="fa fa-inr"></i>{discountedPrice || price}</span>
+        {discountedPrice && <span className="text-gray-500 line-through text-sm"><i className="fa fa-inr"></i>{price}</span>}
       </div>
       {rating && (
         <div className="flex items-center">
