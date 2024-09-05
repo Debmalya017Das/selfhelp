@@ -68,13 +68,13 @@ const subtotal = cart.reduce((acc, item) => acc + (item.discountedPrice || item.
                   <img src={item.image} alt={item.title} className="w-12 h-12 object-cover mr-2" />
                   <span>{item.title}</span>
                 </div>
-                <span>${item.discountedPrice || item.price}</span>
+                <span><i class="fa fa-inr"></i>{item.discountedPrice || item.price}</span>
               </div>
             ))}
             <div className="border-t pt-2">
               <div className="flex justify-between mb-2">
                 <span>Subtotal:</span>
-                <span>${subtotal}</span>
+                <span><i class="fa fa-inr"></i>{subtotal}</span>
               </div>
               <div className="flex justify-between mb-2">
                 <span>Shipping:</span>
@@ -82,7 +82,7 @@ const subtotal = cart.reduce((acc, item) => acc + (item.discountedPrice || item.
               </div>
               <div className="flex justify-between font-bold">
                 <span>Total:</span>
-                <span>${subtotal}</span>
+                <span><i class="fa fa-inr"></i>{subtotal}</span>
               </div>
             </div>
             {/* Payment Options */}

@@ -31,7 +31,7 @@ function Fiction() {
             <div key={product.id} className="border p-4 rounded">
               <img src={product.image} alt={product.name} className="w-full h-48 object-cover mb-2" />
               <h3 className="font-bold">{product.name}</h3>
-              <p>${product.price}</p>
+              <p><i class="fa fa-inr"></i>{product.price}</p>
             </div>
           ))}
         </div>
