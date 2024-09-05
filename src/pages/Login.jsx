@@ -5,38 +5,94 @@ import { auth } from '../components/firebase';
 import { Link, useNavigate } from 'react-router-dom';
 import NavBar from '../components/Nav2';
 import { useUser } from '../hooks/useUser';
+import {Modal} from '../components/Modal';
 
+// const Login = () => {
+//   const { loginWithGoogle } = useContext(AuthContext);
+//   const [email, setEmail] = useState('');
+//   const [password, setPassword] = useState('');
+//   const navigate = useNavigate();
+//    const { setCurrentUser } = useUser();
 
+//   const handleLogin = async (e) => {
+//     e.preventDefault();
+//     try {
+//       await signInWithEmailAndPassword(auth, email, password);
+//       // setCurrentUser(userCredential.user);
+//       alert("Logged in Successfully")
+//       navigate('/');
+//     } catch (error) {
+//       console.error('Login error:', error.message);
+//       alert(error.message);
+//     }
+//   };
+// const handlegooglelogin = async(e) =>{
+//   e.preventDefault();
+//   try{
+//     await loginWithGoogle();
+//     alert("Login success");
+//     navigate('/');
+
+//   }catch(error){
+//     console.error('Login error:', error.message);
+//   }
+// }
 const Login = () => {
   const { loginWithGoogle } = useContext(AuthContext);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
-   const { setCurrentUser } = useUser();
+  const { setCurrentUser } = useUser();
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalContent, setModalContent] = useState({ title: '', message: '', type: '' });
 
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      // setCurrentUser(userCredential.user);
-      alert("Logged in Successfully")
-      navigate('/');
+      setModalContent({
+        title: 'Success!',
+        message: 'You have successfully logged in.',
+        type: 'success'
+      });
+      setModalOpen(true);
+      setTimeout(() => {
+        navigate('/');
+      }, 2000);
     } catch (error) {
       console.error('Login error:', error.message);
-      alert(error.message);
+      setModalContent({
+        title: 'Login Failed',
+        message: error.message,
+        type: 'error'
+      });
+      setModalOpen(true);
     }
   };
-const handlegooglelogin = async(e) =>{
-  e.preventDefault();
-  try{
-    await loginWithGoogle();
-    alert("Login success");
-    navigate('/');
 
-  }catch(error){
-    console.error('Login error:', error.message);
-  }
-}
+  const handlegooglelogin = async (e) => {
+    e.preventDefault();
+    try {
+      await loginWithGoogle();
+      setModalContent({
+        title: 'Success!',
+        message: 'You have successfully logged in with Google.',
+        type: 'success'
+      });
+      setModalOpen(true);
+      setTimeout(() => {
+        navigate('/');
+      }, 2000);
+    } catch (error) {
+      console.error('Login error:', error.message);
+      setModalContent({
+        title: 'Login Failed',
+        message: error.message,
+        type: 'error'
+      });
+      setModalOpen(true);
+    }
+  };
   return (
     <>
       <NavBar/>
@@ -94,6 +150,13 @@ const handlegooglelogin = async(e) =>{
           </div>
         </div>
       </div>
+       <Modal
+        isOpen={modalOpen}
+        onClose={() => setModalOpen(false)}
+        title={modalContent.title}
+        message={modalContent.message}
+        type={modalContent.type}
+      />
     </>
   );
 };

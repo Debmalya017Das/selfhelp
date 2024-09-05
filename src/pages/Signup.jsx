@@ -1,29 +1,3 @@
-// import React, { useState, useContext } from 'react';
-// import { createUserWithEmailAndPassword } from 'firebase/auth';
-// import { auth } from '../components/firebase';
-// import { AuthContext } from '../contexts/AuthContext';
-// import { Link, useNavigate } from 'react-router-dom';
-// import NavBar from '../components/Nav2';
-
-// const SignUp = () => {
-//   const [name, setName] = useState('');
-//   const [email, setEmail] = useState('');
-//   const [password, setPassword] = useState('');
-//   const { signUpWithGoogle } = useContext(AuthContext);
-//   const navigate = useNavigate();
-
-//   const handleSignUp = async (e) => {
-//     e.preventDefault();
-//     try {
-//       await createUserWithEmailAndPassword(auth, email, password);
-//       alert("Account created successfully");
-//       // You might want to store the user's name in a database or user profile here
-//       navigate('/');
-//     } catch (error) {
-//       console.error('Signup error:', error.message);
-//       // Handle error (e.g., display error message to user)
-//     }
-//   };
 import React, { useState,useContext } from 'react';
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { auth, db } from '../components/firebase';
@@ -32,14 +6,17 @@ import { AuthContext} from '../contexts/AuthContext';
 import NavBar from '../components/Nav2';
 import { doc, setDoc } from 'firebase/firestore';
 import { useUser } from '../hooks/useUser';
+import {Modal} from '../components/Modal';
 
 const SignUp = () => {
   const { setCurrentUser } = useUser();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-   const { signUpWithGoogle } = useContext(AuthContext);
+  const { signUpWithGoogle } = useContext(AuthContext);
   const navigate = useNavigate();
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalContent, setModalContent] = useState({ title: '', message: '', type: '' });
 
   const handleSignUp = async (e) => {
     e.preventDefault();
@@ -54,26 +31,50 @@ const SignUp = () => {
       });
 
       setCurrentUser(userCredential.user);
-      alert("Account created successfully");
-      navigate('/');
+      setModalContent({
+        title: 'Success!',
+        message: 'Your account has been created successfully.',
+        type: 'success'
+      });
+      setModalOpen(true);
+      setTimeout(() => {
+        navigate('/');
+      }, 2000);
     } catch (error) {
       console.error('Signup error:', error.message);
-      alert(error.message);
+      setModalContent({
+        title: 'Signup Failed',
+        message: error.message,
+        type: 'error'
+      });
+      setModalOpen(true);
     }
   };
 
   const handleGoogleSignUp = async () => {
     try {
-      await signUpWithGoogle();
-      setCurrentUser(userCredential.user);
-      alert("Account created successfully");
-      navigate('/');
-      alert("Account created successfully");
+      const result = await signUpWithGoogle();
+      setCurrentUser(result.user);
+      setModalContent({
+        title: 'Success!',
+        message: 'Your account has been created successfully with Google.',
+        type: 'success'
+      });
+      setModalOpen(true);
+      setTimeout(() => {
+        navigate('/');
+      }, 2000);
     } catch (error) {
       console.error('Google sign-up error:', error.message);
-      // Handle error (e.g., display error message to user)
+      setModalContent({
+        title: 'Signup Failed',
+        message: error.message,
+        type: 'error'
+      });
+      setModalOpen(true);
     }
   };
+
 
   return (
     <>
@@ -126,6 +127,13 @@ const SignUp = () => {
           </div>
         </div>
       </div>
+      <Modal
+        isOpen={modalOpen}
+        onClose={() => setModalOpen(false)}
+        title={modalContent.title}
+        message={modalContent.message}
+        type={modalContent.type}
+      />
     </>
   );
 };
