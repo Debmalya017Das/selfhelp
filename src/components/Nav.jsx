@@ -44,7 +44,7 @@ const NavBar = () => {
       <nav className="bg-white border border-b-black">
         <div className="container mx-auto px-4 py-3 flex justify-between items-center">
           <NavLink to="/">
-            <img src={logo} className="w-1/2 h-1/2 flex" alt="" />
+            <img src={logo} className="w-1/2 h-3/4 ml-3 flex " alt="" />
           </NavLink>
           <div className="lg:hidden">
             <button onClick={toggleMenu} className="text-black text-2xl">

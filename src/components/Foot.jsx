@@ -14,7 +14,7 @@ const Footer = () => {
           <div className="md:w-1/3 mb-8 md:mb-0 pl-7">
            <Link to="/">
           {/* <h1 className="font-semibold lg:mx-16 font-montserrat text-2xl">BookWormCorner</h1> */}
-          <img src={logo}  className="w-1/2 h-1/2 flex"alt="" />
+          <img src={logo}  className="w-1/3 h-1/2 flex ml-5"alt="" />
           </Link>
             <ul className="pl-10 mt-4">
               <li className="mb-3">
