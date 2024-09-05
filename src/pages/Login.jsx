@@ -23,6 +23,7 @@ const Login = () => {
       navigate('/');
     } catch (error) {
       console.error('Login error:', error.message);
+      alert(error.message);
     }
   };
 const handlegooglelogin = async(e) =>{

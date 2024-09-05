@@ -28,7 +28,7 @@ const NavBar = () => {
 
   return (
     <>
-      <div className="bg-black "></div>
+     <div className="bg-black py-6"></div>
       <nav className="bg-white border border-b-black ">
         <div className="container mx-auto px-4 py-3 flex justify-between items-center">
           <NavLink to="/">
@@ -50,7 +50,7 @@ const NavBar = () => {
             <NavLink to="/contact"><li>Contact</li></NavLink>
             <NavLink to="/about"><li>About</li></NavLink>
             {user ? (
-              <li><button onClick={handleLogout}>Logout</button></li>
+              <li className='text-red-500'><button onClick={handleLogout}>Logout</button></li>
             ) : (
               <>
                 <NavLink to="/signup"><li>Signup</li></NavLink>
@@ -86,7 +86,7 @@ const NavBar = () => {
             <NavLink to="/contact"><li>Contact</li></NavLink>
             <NavLink to="/about"><li>About</li></NavLink>
             {user ? (
-              <li><button onClick={handleLogout}>Logout</button></li>
+              <li className='text-red-500'><button onClick={handleLogout}>Logout</button></li>
             ) : (
               <>
                 <NavLink to="/login"><li>Login</li></NavLink>
