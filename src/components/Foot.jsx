@@ -59,7 +59,8 @@ const Footer = () => {
 
             {/* Contacts */}
             <div>
-              <h3 className="text-lg font-semibold mb-4">Contacts</h3>
+              <Link to="/contact"><h3 className="text-lg font-semibold mb-4">Contact Us</h3></Link>
+              
               <p>Email: contact@bookwormcorner.com</p>
               <p>Phone: +91(9646951315)</p>
             </div>
