@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { collection, getDocs, query, where } from 'firebase/firestore';
 import { db } from '../components/firebase';
 import NavBar from '../components/Nav';
-import sh from "./image/image.png";
+import sh from "./image/banner2.png";
 import { CartContext } from '../contexts/CartContext';
 import { WishlistContext } from '../contexts/WishlistContext';
 import { Link } from 'react-router-dom';
@@ -74,11 +74,11 @@ const Home = () => {
     <>
       <NavBar />
       {/* Rest of the component remains the same */}
-      <div className="flex items-center justify-center py-8">
+      <div className="w-full h-screen w-full h-[300px] sm:h-[100px] md:h-[500px] lg:h-screen shadow-lg mb-4">
         <img 
           src={sh}
           alt="Self-help literature"
-          className="w-full h-full m-4 lg:max-w-screen-lg md:max-w-screen-md sm:max-w-screen-sm"
+          className="w-full h-full object-cover "
         />
       </div>
       <div className="lg:mx-24 my-10">

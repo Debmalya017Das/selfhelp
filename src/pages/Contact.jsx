@@ -1,7 +1,40 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react';
 import NavBar from '../components/Nav';
+import { db } from '../components/firebase';
+import { collection, addDoc } from 'firebase/firestore';
 
 const Contact = () => {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    message: '',
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitMessage, setSubmitMessage] = useState('');
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prevData => ({
+      ...prevData,
+      [name]: value
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    try {
+      await addDoc(collection(db, 'contactForms'), formData);
+      setSubmitMessage('Message sent successfully!');
+      setFormData({ name: '', email: '', phone: '', message: '' });
+    } catch (error) {
+      console.error('Error submitting form: ', error);
+      setSubmitMessage('Error sending message. Please try again.');
+    }
+    setIsSubmitting(false);
+  };
+
   return (
     <>
     <NavBar />
@@ -32,20 +65,55 @@ const Contact = () => {
           </div>
         </div>
       </div>
-      <div className="md:w-1/2">
-        <div className="bg-white rounded-lg shadow-md p-6">
-          <form className="space-y-4">
-            <input className="w-full p-2 border rounded bg-slate-100" type="text" placeholder="Your Name *" required />
-            <input className="w-full p-2 border rounded bg-slate-100" type="email" placeholder="Your Email *" required />
-            <input className="w-full p-2 border rounded bg-slate-100" type="tel" placeholder="Your Phone *" required />
-            <textarea className="w-full p-2 border rounded h-32 bg-slate-100" placeholder="Your Message" />
-            <button className="bg-red-500 text-white py-2 px-4 rounded hover:bg-red-600 transition duration-300 " type="submit">
-              Send Message
-            </button>
-          </form>
+     <div className="md:w-1/2">
+          <div className="bg-white rounded-lg shadow-md p-6">
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <input
+                className="w-full p-2 border rounded bg-slate-100"
+                type="text"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                placeholder="Your Name *"
+                required
+              />
+              <input
+                className="w-full p-2 border rounded bg-slate-100"
+                type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                placeholder="Your Email *"
+                required
+              />
+              <input
+                className="w-full p-2 border rounded bg-slate-100"
+                type="tel"
+                name="phone"
+                value={formData.phone}
+                onChange={handleChange}
+                placeholder="Your Phone *"
+                required
+              />
+              <textarea
+                className="w-full p-2 border rounded h-32 bg-slate-100"
+                name="message"
+                value={formData.message}
+                onChange={handleChange}
+                placeholder="Your Message"
+              />
+              <button
+                className="bg-red-500 text-white py-2 px-4 rounded hover:bg-red-600 transition duration-300"
+                type="submit"
+                disabled={isSubmitting}
+              >
+                {isSubmitting ? 'Sending...' : 'Send Message'}
+              </button>
+              {submitMessage && <p className="text-green-600">{submitMessage}</p>}
+            </form>
+          </div>
         </div>
       </div>
-    </div>
     </>
   )
 }
