@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import logo from '../pages/image/logo2.png'
+import logo from '../pages/image/logo.png'
 
 const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -12,11 +12,11 @@ const NavBar = () => {
   return (
     <>
       <div className="bg-black py-6"></div>
-      <nav className="bg-white border border-b-black pt-3">
-        <div className="container mx-auto px-4 py-3 flex justify-between items-center">
+      <nav className="bg-white border border-b-black ">
+        <div className="container mx-auto px-4  flex justify-between items-center">
          <NavLink to="/">
           {/* <h1 className="font-semibold lg:mx-16 font-montserrat text-2xl">BookWormCorner</h1> */}
-          <img src={logo}  className="w-1/2 h-1/2 flex"alt="" />
+          <img src={logo}  className="w-1/2 h-full flex"alt="" />
           </NavLink>
           <div className="lg:hidden">
             <button onClick={toggleMenu} className="text-black text-2xl">

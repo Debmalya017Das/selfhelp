@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
-import logo from '../pages/image/logo2.png';
+import logo from '../pages/image/logo.png';
 
 const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -42,9 +42,10 @@ const NavBar = () => {
     <>
       <div className="bg-black py-6"></div>
       <nav className="bg-white border border-b-black">
-        <div className="container mx-auto px-4 py-3 flex justify-between items-center">
+        <div className="container mx-auto  px-4 flex justify-between items-center">
+          {/* <div className="flex items-center space-x-8 lg:space-x-16"> */}
           <NavLink to="/">
-            <img src={logo} className="w-1/2 h-3/4 ml-3 flex " alt="" />
+            <img src={logo} className="w-1/2 h-full ml-3 " alt="" />
           </NavLink>
           <div className="lg:hidden">
             <button onClick={toggleMenu} className="text-black text-2xl">
@@ -52,7 +53,7 @@ const NavBar = () => {
             </button>
           </div>
           {/* Desktop Menu */}
-          <ul className="hidden lg:flex lg:space-x-12 md:space-x-6 lg:ml-8 font-montserrat text-black">
+          <ul className="hidden lg:flex lg:space-x-12 md:space-x-6 justify-between items-center font-montserrat text-black">
             <NavLink to="/"><li className="focus:outline-none">Home</li></NavLink>
             <li className="relative">
               <button onClick={toggleDropdown} className="focus:outline-none">

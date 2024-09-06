@@ -1,5 +1,5 @@
 import React, { useContext,useState } from 'react';
-import NavBar from '../components/Nav3';
+import NavBar from '../components/Nav';
 import { CartContext } from '../contexts/CartContext';
 import { WishlistContext} from '../contexts/WishlistContext';
 
