@@ -40,7 +40,7 @@ const NavBar = () => {
         {/* Mobile Menu */}
         <div className={`lg:hidden ${isOpen ? 'block' : 'hidden'}`}>
           <ul className="flex flex-col space-y-2 p-4">
-            <NavLink to="/home"><li>Home</li></NavLink>
+            <NavLink to="/"><li>Home</li></NavLink>
             <NavLink to="/contact"><li>Contact</li></NavLink>
             <NavLink to="/about"><li>About</li></NavLink>
             <NavLink to="/signup"><li>Sign Up</li></NavLink>
